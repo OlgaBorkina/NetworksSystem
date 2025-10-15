@@ -1,16 +1,29 @@
-import dao.NetworkDao;
-import service.NetworksService;
+import dao.*;
+import service.*;
 import ui.UiController;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        var uiController = new UiController(scanner, System.out);
+    public static void main(String[] args) throws Exception {
+       UiController uiController = new UiController(new Scanner(System.in), System.out);
 
-        var networkDao = new NetworkDao();
-        var networkService = new NetworksService(uiController, networkDao);
-        networkService.process();
+       NetworkDao networkDao = new NetworkDao();
+        DeviceDao deviceDao = new DeviceDao();
+        ConnectionDao connectionDao = new ConnectionDao();
+
+        NetworksService networksService = new NetworksService(uiController, networkDao);
+        DeviceService deviceService = new DeviceService(uiController, deviceDao, networkDao);
+        ConnectionService connectionService = new ConnectionService(uiController, connectionDao, deviceDao);
+
+        ApplicationService appService = new ApplicationService(
+                uiController,
+                networksService,
+                deviceService,
+                connectionService
+        );
+
+        appService.process();
+
     }
 }
