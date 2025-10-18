@@ -1,0 +1,25 @@
+// 1. Написать и выполнить HTTP-запрос с HTTP-методом GET при помощи cURL используя путь api/health/check, для получения статус сервера.//
+
+/curl -X GET "https://timeapi.io/api/health/check" -H "accept: application/json"
+### Nothing is returned through cURL, but through POSTMAN - 200 ok.
+
+// 2. Написать и выполнить HTTP-запрос с HTTP-методом GET и параметром запроса (Query Parameter) при помощи cURL используя путь api/time/current/zone, для текущего времени согласно переданной временной зоны.
+
+/curl -X GET "https://timeapi.io/api/time/current/zone?timeZone=Europe%2FLondon"  -H "accept: application/json"
+###{"year":2025,"month":10,"day":18,"hour":10,"minute":42,"seconds":30,"milliSeconds":470,"dateTime":"2025-10-18T10:42:30.4702983","date":"10/18/2025","time":"10:42","timeZone":"Europe/London","dayOfWeek":"Saturday","dstActive":true}
+
+// 3.Написать и выполнить HTTP-запрос с HTTP-методом GET и параметром запроса (query-parameter) при помощи cURL используя путь  http://аpi/timе/currеnt/iр, для текущего времени согласно переданного IP-адреса.
+
+/curl -X GET "https://timeapi.io/api/time/current/ip?ipAddress=192.168.179.1" -H "accept: application/json"
+###{"year":2025,"month":10,"day":18,"hour":9,"minute":55,"seconds":38,"milliSeconds":152,"dateTime":"2025-10-18T09:55:38.152718","date":"10/18/2025","time":"09:55","timeZone":"UTC","dayOfWeek":"Saturday","dstActive":false}
+
+/curl -X GET "https://timeapi.io/api/time/current/ip?ipAddress=84.229.159.72" -H "accept: application/json"
+###{"year":2025,"month":10,"day":18,"hour":13,"minute":5,"seconds":17,"milliSeconds":375,"dateTime":"2025-10-18T13:05:17.3755836","date":"10/18/2025","time":"13:05","timeZone":"Asia/Jerusalem","dayOfWeek":"Saturday","dstActive":true}
+
+// 4. Написать и выполнить HTTP-запрос с HTTP-методом GET и параметром пути (Path Variable, Path Parameter) при помощи cURL используя путь api/conversion/dayoftheweek/{date}, для конвертации переданной даты в соответствующей ей день недели.
+/curl -X GET "https://timeapi.io/api/conversion/dayoftheweek/1980-11-27" -H "accept: application/json"
+###{"dayOfWeek":"Thursday"}
+
+// 5.Написать и выполнить HTTP-запрос с HTTP-методом POST и телом запроса (Request Body) при помощи cURL используя путь api/conversion/translate, для перевода даты в времени в человеко-понятно сообщение согласно переданному языку.
+/curl -X POST "https://timeapi.io/api/conversion/translate" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"languageCode\":\"he\",\"dateTime\":\"2025-10-18 14:20:00\",\"timeZone\":\"Asia/Jerusalem\"}"
+###{"dateTime":"2025-10-18 14:20:00","languageCode":"he","friendlyDateTime":"יום שבת, 18 באוקטובר 2025 14:20:00","friendlyDate":"יום שבת, 18 באוקטובר 2025","friendlyTime":"14:20:00"}
